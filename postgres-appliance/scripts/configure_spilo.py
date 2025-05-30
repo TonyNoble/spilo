@@ -283,8 +283,8 @@ postgresql:
   use_unix_socket: true
   use_unix_socket_repl: true
   name: '{{instance_data.id}}'
-  listen: '*:{{PGPORT}}'
-  connect_address: {{instance_data.ip}}:{{PGPORT}}
+  listen: '{{POSTGRESQL_LISTEN}}'
+  connect_address: {{POSTGRESQL_CONNECT_ADDRESS}}
   data_dir: {{PGDATA}}
   parameters:
     archive_command: {{{postgresql.parameters.archive_command}}}
@@ -697,6 +697,8 @@ def get_placeholders(provider):
 
     placeholders['instance_data'] = get_instance_metadata(provider)
     placeholders.setdefault('RESTAPI_CONNECT_ADDRESS', placeholders['instance_data']['ip'])
+    placeholders.setdefault('POSTGRESQL_CONNECT_ADDRESS', placeholders['instance_data']['ip'] + ':' + placeholders['PGPORT'])
+    placeholders.setdefault('POSTGRESQL_LISTEN', '*:' + placeholders['PGPORT'])
 
     placeholders['BGMON_LISTEN_IP'] = get_listen_ip()
 

@@ -17,6 +17,8 @@ Environment Configuration Settings
 - **PGROOT**: a directory where we put the pgdata (by default /home/postgres/pgroot). One may adjust it to point to the mount point of the persistent volume, such as EBS.
 - **WALE_TMPDIR**: directory to store WAL-E temporary files. PGROOT/../tmp by default, make sure it has a few GBs of free space.
 - **PGDATA**: location of PostgreSQL data directory, by default PGROOT/pgdata.
+- **POSTGRESQL_CONNECT_ADDRESS**: hostname or IP address of the PostgreSQL server, used by Patroni to connect to the PostgreSQL instance. If not set, Patroni will use determine the IP dynamically.
+- **POSTGRESQL_LISTEN**: IP address of the PostgreSQL server to bind to.  If not set, '*:5432' will be used, which means that PostgreSQL will listen on all available interfaces.
 - **PGUSER_STANDBY**: username for the replication user, 'standby' by default.
 - **PGPASSWORD_STANDBY**: a password for the replication user, 'standby' by default.
 - **STANDBY_HOST**: hostname or IP address of the primary to stream from.
